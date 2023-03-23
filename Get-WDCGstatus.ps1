@@ -1,7 +1,7 @@
 <#
 .DESCRIPTION
 This script gets all Windows clients from the AD, active during the last 90 days,
-verifies the activation status of Microsoft Defender Credential Guard (MDCG) on these 
+verifies the activation status of Windows Defender Credential Guard (WDCG) on these 
 clients.
 It can also be targeted against a single computer or a group of computers.
 
@@ -15,8 +15,8 @@ Specifies a target OU distinguishedName (DN).
 Specifies a target computer.
 
 .EXAMPLE
-.\Get-MDCGStatus.ps1 -OU "OU=Berlin,DC=company,DC=de"
-Get MDCG status for computers in Berlin OU.
+.\Get-WDCGstatus.ps1 -OU "OU=Berlin,DC=company,DC=de"
+Get WDCG status for computers in Berlin OU.
 
 .NOTES
 https://github.com/k0pht
@@ -30,7 +30,6 @@ param (
 )
 
 #--------------- Main Code ---------------
-
 # Instructions based on -Group parameter
 if($Group) {
     # Targets definition
@@ -38,7 +37,7 @@ if($Group) {
     $totalItems = $targets.count
     # Initialisation message
     Write-Host ""
-    Write-Host "[*] Checking Microsoft Defender Credential Guard status on the"$targets.count"members of $Group..." -ForegroundColor Yellow
+    Write-Host "[*] Checking Windows Defender Credential Guard status on the"$targets.count"members of $Group..." -ForegroundColor Yellow
 }
 # Instructions based on -OU parameter
 elseif($OU) {
@@ -46,7 +45,7 @@ elseif($OU) {
     $targets = (Get-ADComputer -Filter * -SearchBase "$OU").name
     # Initialisation message
     Write-Host ""
-    Write-Host "[*] Checking Microsoft Defender Credential Guard status on the"$targets.count"members of $OU..." -ForegroundColor Yellow
+    Write-Host "[*] Checking Windows Defender Credential Guard status on the"$targets.count"members of $OU..." -ForegroundColor Yellow
 }
 # Instructions based on -ComputerName parameter
 elseif($ComputerName) {
@@ -54,7 +53,7 @@ elseif($ComputerName) {
     $targets = $ComputerName
     # Initialisation message
     Write-Host ""
-    Write-Host "[*] Checking Microsoft Defender Credential Guard status on $targets..." -ForegroundColor Yellow
+    Write-Host "[*] Checking Windows Defender Credential Guard status on $targets..." -ForegroundColor Yellow
 }
 else {
     # Targets definition
@@ -63,13 +62,13 @@ else {
     $totalItems = $targets.count
     # Initialisation message
     Write-Host ""
-    Write-Host "[*] Checking Microsoft Defender Credential Guard status on the"$targets.count"active computer found..." -ForegroundColor Yellow
+    Write-Host "[*] Checking Windows Defender Credential Guard status on the"$targets.count"active computer found..." -ForegroundColor Yellow
 }
 # Looping through each targeted computer
 foreach ($computer in $targets){
     # Test if computer is reachable
     if (Test-Connection -BufferSize 32 -Count 1 -ComputerName $computer -Quiet){
-        # Check if MDCG is enabled
+        # Check if WDCG is enabled
         $value = (Get-CimInstance -ComputerName $computer -ClassName Win32_DeviceGuard -Namespace root\Microsoft\Windows\DeviceGuard -ErrorAction SilentlyContinue).SecurityServicesRunning
        
         if ($value){

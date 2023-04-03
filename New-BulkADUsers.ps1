@@ -23,7 +23,7 @@ https://github.com/k0pht
 #--------------- Parameters declaration and initialisation ---------------
 param (
     [Parameter(Mandatory=$true)][string]$UserList,
-    [Parameter(Mandatory=$true)][string]$Domain    
+    [Parameter()][string]$Domain = (Get-ADDomain).DNSRoot    
 )
 
 #--------------- Functions declaration -----------------------------------
@@ -64,6 +64,8 @@ foreach ($user in $users) {
             -AccountPassword $password -ChangePasswordAtLogon $True `
             -Enabled $true
         
-        Write-Host "Account '$samaccountname' created." -ForegroundColor Green
+        if ($?) {
+            Write-Host "Account '$samaccountname' created." -ForegroundColor Green
+        }
     }
 }

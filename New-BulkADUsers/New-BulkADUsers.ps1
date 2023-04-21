@@ -2,7 +2,7 @@
 .DESCRIPTION
 This script reads the content from a CSV file and create Active Directory user 
 accounts from its values with random complex passwords. The template for the 
-CSV file is available on the GitHub repository.
+CSV file (userlist.csv) is available on the GitHub repository.
 Requires ActiveDirectory PowerShell module.
 
 .PARAMETER UserList

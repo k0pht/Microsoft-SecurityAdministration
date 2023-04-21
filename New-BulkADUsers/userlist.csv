@@ -1,0 +1,3 @@
+﻿Givenname;Surname;Name;Displayname;Description;samaccountname;OU
+Firstname1;LASTNAME1;T1 LASTNAME1 Firstname1;T1 LASTNAME1 Firstname1;;t1fla;OU=Accounts,OU=Tier1,OU=Admin,DC=company,DC=com
+Firstname1;LASTNAME1;T2 LASTNAME1 Firstname1;T2 LASTNAME1 Firstname1;;t2fla;OU=Accounts,OU=Tier2,OU=Admin,DC=company,DC=com

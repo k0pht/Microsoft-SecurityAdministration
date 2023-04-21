@@ -4,8 +4,8 @@ This repository contains scripts I wrote and used during different engagements, 
 ## AD Tiering Model
 Once working on implementing the AD Tiering Model, now part of the [Enterprise access model](https://learn.microsoft.com/en-us/security/privileged-access-workstations/privileged-access-access-model), I used `New-BulkADUsers.ps1` and `Get-GroupMembership.ps1` for the tasks described below.
 
-### Create new privileged accounts with [New-BulkADUsers.ps1](https://github.com/k0pht/Microsoft-SecurityAdministration/blob/main/New-BulkADUsers.ps1)
-To start with new fresh privileged (administrator) T0, T1 and T2 accounts, with cleaner ACLs than existing ones and no group membership, I created all the accounts with `New-BulkADUsers.ps1`.
+### Create new privileged accounts with `New-BulkADUsers.ps1`
+To start with new fresh privileged (administrator) T0, T1 and T2 accounts, with cleaner ACLs than existing ones and no group membership, I created all the accounts with [New-BulkADUsers.ps1](https://github.com/k0pht/Microsoft-SecurityAdministration/blob/main/New-BulkADUsers/New-BulkADUsers.ps1).
 
 ### Audit privileged accounts group membership with [Get-GroupMembership.ps1](https://github.com/k0pht/Microsoft-SecurityAdministration/blob/main/Get-GroupMembership.ps1)
 To clean up the group membership of privileged accounts, I exported all groups from which the targeted privileged accounts are members of for further review with the IT team.
